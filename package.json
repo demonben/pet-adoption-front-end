@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "react-modal": "^3.12.1",
     "react-router-dom": "^5.2.0"
   }
 }

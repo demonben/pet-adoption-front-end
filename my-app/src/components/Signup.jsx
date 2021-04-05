@@ -1,46 +1,75 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
+import Modal from "react-modal";
 
-export default function Signup() {
-  const [firstName,setFirstName]=useState('');
+Modal.setAppElement("#root");
+
+export default function Signup(props) {
+  const [firstName, setFirstName] = useState("");
   const [secondName, setSecondName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-const signup = (e) =>{
-  e.preventDefault();
-console.log(firstName);
-}
+  // console.log(props.func("zzzzzzz"))
 
+  const signup = (e) => {
+    e.preventDefault();
+    localStorage.setItem("firstName", firstName);
+    localStorage.setItem("secondName", secondName);
+    props.func(firstName,secondName);
+  };
+
+  // props.func.
   return (
     <div>
-      <p>Signup</p>
-      <form onSubmit={signup}>
-        <p>Create a new Account</p>
-        <label htmlFor="firstName">First Name:</label>
-        <input
-          type="text"
-          name="firstName"
-          onChange={(e) => setFirstName(e.target.value)}
-        />
+      <button onClick={() => setModalIsOpen(true)}>Signup</button>
+      <Modal isOpen={modalIsOpen}>
+        <p>Signup</p>
+        <form onSubmit={signup}>
+          <p>Create a new Account</p>
+          <label htmlFor="firstName">First Name:</label>
+          <input
+            type="text"
+            name="firstName"
+            onChange={(e) => setFirstName(e.target.value)}
+          />
 
-        <label htmlFor="secondName">Last Name:</label>
-        <input type="email" name="secondName" />
+          <label htmlFor="secondName">Last Name:</label>
+          <input
+            type="text"
+            name="secondName"
+            onChange={(e) => setSecondName(e.target.value)}
+          />
 
-        <label htmlFor="phone">Phone Number:</label>
-        <input type="tel" name="phone" />
+          <label htmlFor="phone">Phone Number:</label>
+          <input
+            type="tel"
+            name="phone"
+            onChange={(e) => setPhone(e.target.value)}
+          />
 
-        <label htmlFor="email">Email:</label>
-        <input type="email" name="email" />
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-        <label htmlFor="password">Password:</label>
-        <input type="number" name="password" />
+          <label htmlFor="password">Password:</label>
+          <input
+            type="number"
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-        <label htmlFor="password">Check Password:</label>
-        <input type="number" name="password" />
+          <label htmlFor="password">Check Password:</label>
+          <input type="number" name="password" />
 
-        <input type="submit" value="Create account" />
-      </form>
+          <input type="submit" value="Create account" />
+        </form>
+        <button onClick={() => setModalIsOpen(false)}>close modal</button>
+      </Modal>
     </div>
   );
 }
