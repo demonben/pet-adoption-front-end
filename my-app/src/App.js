@@ -56,11 +56,7 @@ function App() {
           </Router>
         </Switch>
       </Router>
-      {/* <button
-        className="btn btn-primary"
-      >
-        Logout
-            </button> */}
+    
     </div>
   );
 }

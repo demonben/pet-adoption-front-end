@@ -19,11 +19,14 @@ export default function HomePage() {
       <Signup func={setUserName} />
       {name && (
         <h1>
-          `Wellcome {name} {lastName} to our amaizing site`
+          Welcome {name} {lastName} to our amazing site
         </h1>
       )}
-      {!name && <h1>Wellcome to our amaizing site </h1> }
+      {!name && <h1>Welcome to our amazing site </h1>}
       <p>This service will help you to find new pet.</p>
+      <button className="btn btn-primary" onClick={() => setName("")}>
+        Logout
+      </button>
     </div>
   );
 }

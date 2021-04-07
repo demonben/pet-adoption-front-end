@@ -17,14 +17,16 @@ export default function Signup(props) {
     e.preventDefault();
     localStorage.setItem("firstName", firstName);
     localStorage.setItem("secondName", secondName);
-    props.func(firstName,secondName);
+    props.func(firstName, secondName);
   };
-
+const handleCloseModal = ()=>{
+  setModalIsOpen(false)
+}
   // props.func.
   return (
     <div>
       <button onClick={() => setModalIsOpen(true)}>Signup</button>
-      <Modal isOpen={modalIsOpen}>
+      <Modal isOpen={modalIsOpen} onRequestClose={()=>handleCloseModal()}>
         <p>Signup</p>
         <form onSubmit={signup}>
           <p>Create a new Account</p>
@@ -65,8 +67,13 @@ export default function Signup(props) {
 
           <label htmlFor="password">Check Password:</label>
           <input type="number" name="password" />
-
-          <input type="submit" value="Create account" />
+          <p>
+            <input
+              className="btn btn-primary"
+              type="submit"
+              value="Create account"
+            />
+          </p>
         </form>
         <button onClick={() => setModalIsOpen(false)}>close modal</button>
       </Modal>

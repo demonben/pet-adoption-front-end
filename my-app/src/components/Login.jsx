@@ -15,11 +15,13 @@ export default function Login() {
     console.log("gj");
 
   }
-
+const handleCloseModal =()=>{
+setModalIsOpen(false)
+}
   return (
     <div>
       <button onClick={() => setModalIsOpen(true)}>Login</button>
-      <Modal isOpen={modalIsOpen}>
+      <Modal isOpen={modalIsOpen} onRequestClose={()=>handleCloseModal()}>
         <p>Login</p>
         <form onSubmit={login}>
           <label htmlFor="email">Email:</label>
