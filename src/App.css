@@ -1,8 +1,26 @@
 .App {
   text-align: center;
 }
-.button{
-
+.animalItem{
+  padding: 18px;
+  border: indigo solid 1px;
+}
+.dateStyle{
+  font-size:10 ;
+  margin-bottom:12px ;
+}
+.animalList{
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 16px;
+}
+.listAnimals{
+  max-width: 600px;
+  margin: 0 auto;
+  display: grid;
+  row-gap: 30px;
+  margin-top: 50px;
+  /* border: solid 1px green; */
 }
 /* nav start*/
 /* .navbar { */

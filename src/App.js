@@ -6,17 +6,42 @@ import HomePage from "./components/HomePage"
 import Signup from "./components/Signup"
 import Login from './components/Login';
 import SearchPage from './components/SearchPage';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import MyPetsPage from './components/MyPetsPage';
 import ProfileSettings from './components/ProfileSettings';
 import PetPage from "./components/PetPage"
 import Dashboard from './components/Dashboard';
 import AddPet from './components/AddPet'
+import { getAnimals } from './lib/api';
 
-
+// const mockAnimal = [
+//   {
+//     id: 1234, nameAnimal:"Bobik",
+//     species:"dog", dateCreated: Date.now()},
+// {
+//   id: 12234234, nameAnimal:"Marusya",
+//     species:"cat", dateCreated: Date.now()
+// },
+// {
+//   id: 1254334534, nameAnimal: "CatAndDog",
+//     species:"catAndDog", dateCreated: Date.now()
+// }
+// ]
 
 function App() {
-  const [name, setName] = useState("")
+  // const [nameUser, setName] = useState('')
+
+  const [animals, setAddNewAnimal] = useState([]);
+
+  useEffect(() => {
+   getAnimals().then(animals =>{
+     setAddNewAnimal(animals)
+   })
+  }, [])
+
+  const handleOnNewAnimal = (newAnimal) =>{
+    setAddNewAnimal(prevAnimals => [...prevAnimals, newAnimal])
+  }
 
   return (
     <div className="App">
@@ -44,11 +69,11 @@ function App() {
           </Router>
 
           <Router path="/pets">
-            <PetPage />
+            <PetPage animals={animals} />
           </Router>
 
           <Router path="/addPet">
-            <AddPet />
+            <AddPet onNewAnimal={handleOnNewAnimal}/>
           </Router>
 
           <Router path="/dashboard">
@@ -56,7 +81,7 @@ function App() {
           </Router>
         </Switch>
       </Router>
-    
+
     </div>
   );
 }

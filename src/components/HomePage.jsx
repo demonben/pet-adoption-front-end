@@ -1,7 +1,7 @@
 import React from "react";
 import Login from "./Login";
 import Signup from "./Signup";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 
 export default function HomePage() {

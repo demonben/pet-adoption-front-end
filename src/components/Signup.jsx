@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
+import "./SignUp.css";
 
 Modal.setAppElement("#root");
 
@@ -29,70 +30,77 @@ const handleCloseModal = ()=>{
         Signup
       </button>
       <Modal isOpen={modalIsOpen} onRequestClose={() => handleCloseModal()}>
-        <p>Signup</p>
-        <form onSubmit={signup}>
-          <p>Create a new Account</p>
-          <p>
-            <label htmlFor="firstName">First Name:</label>
-            <input
-              type="text"
-              name="firstName"
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </p>
+        <div className="d-flex justify-content-center">
+          <p>Signup</p>
+        </div>
 
-          <p>
-            <label htmlFor="secondName">Last Name:</label>
-            <input
-              type="text"
-              name="secondName"
-              onChange={(e) => setSecondName(e.target.value)}
-            />
-          </p>
-          <p></p>
-          <label htmlFor="phone">Phone Number:</label>
-          <input
-            type="tel"
-            name="phone"
-            onChange={(e) => setPhone(e.target.value)}
-          />
-          <p>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              name="email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </p>
+        <form className="d-flex justify-content-center" onSubmit={signup}>
+          <div className="wrapper">
+            <div className="d-flex flex-row">
+              <p className="name">Create a new Account</p>
+              <button
+                className="btn btn-primary"
+                onClick={() => setModalIsOpen(false)}
+              >
+                x
+              </button>
+            </div>
+            <p>
+              <label htmlFor="firstName">First Name:</label>
+              <input
+                type="text"
+                name="firstName"
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </p>
 
-          <p>
-            <label htmlFor="password">Password:</label>
-            <input
-              type="number"
-              name="password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </p>
+            <p>
+              <label htmlFor="secondName">Last Name:</label>
+              <input
+                type="text"
+                name="secondName"
+                onChange={(e) => setSecondName(e.target.value)}
+              />
+            </p>
+            <p>
+              <label htmlFor="phone">Phone Number:</label>
+              <input
+                type="tel"
+                name="phone"
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </p>
+            <p>
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                name="email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </p>
 
-          <p>
-            
-          </p>
-          <label htmlFor="password">Check Password:</label>
-          <input type="number" name="password" />
-          <p>
-            <input
-              className="btn btn-primary"
-              type="submit"
-              value="Create account"
-            />
-          </p>
+            <p>
+              <label htmlFor="password">Password:</label>
+              <input
+                type="number"
+                name="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </p>
+
+            <p>
+              <label htmlFor="password">Check Password:</label>
+              <input type="number" name="password" />
+            </p>
+            <p className="d-flex justify-content-center">
+              <input
+                className="btn btn-primary"
+                type="submit"
+                value="Create account"
+              />
+            </p>
+          </div>
         </form>
-        <button
-          className="btn btn-primary"
-          onClick={() => setModalIsOpen(false)}
-        >
-          close modal
-        </button>
       </Modal>
     </div>
   );

@@ -51,7 +51,7 @@ export default function NavBar() {
 // {
 //   /* <div className="navContainer">
 //         <Navbar bg="dark" variant="dark">
-          
+
 //           <ul className="navList ">
 //             <li>
 //               <Link className="nav-item" to="/">
@@ -59,13 +59,11 @@ export default function NavBar() {
 //               </Link>
 //             </li>
 
-
 //             <li>
 //               <Link className="nav-item" to="/search">
 //                 Search
 //               </Link>
 //             </li>
-
 
 //             <li>
 //               <Link className="nav-item" to="/myPets">
@@ -73,20 +71,17 @@ export default function NavBar() {
 //               </Link>
 //             </li>
 
-
 //             <li>
 //               <Link className="nav-item" to="/profile">
 //                 Profile Settings
 //               </Link>
 //             </li>
 
-
 //             <li>
 //               <Link className="nav-item" to="/pets">
 //                 Pets
 //               </Link>
 //             </li>
-
 
 //             <li>
 //               <Link className="nav-item" to="/addPet">
@@ -104,5 +99,5 @@ export default function NavBar() {
 //       </div> */
 // }
 // {
-  // /* </div> */
+// /* </div> */
 // }

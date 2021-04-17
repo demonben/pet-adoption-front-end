@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function ProfileSettings() {
   const [firstName, setFirstName] = useState("");
@@ -21,40 +21,46 @@ export default function ProfileSettings() {
           name="firstName"
           onChange={(e) => setFirstName(e.target.value)}
         />
-        <label htmlFor="secondName">Last Name:</label>
-        <input
-          type="text"
-          name="secondName"
-          onChange={(e) => setSecondName(e.target.value)}
-        />
+        <p>
+          <label htmlFor="secondName">Last Name:</label>
+          <input
+            type="text"
+            name="secondName"
+            onChange={(e) => setSecondName(e.target.value)}
+          />
+        </p>
+        <p>
+          <label htmlFor="phone">Phone Number:</label>
+          <input
+            type="tel"
+            name="phone"
+            onChange={(e) => setPhone(e.target.value)}
+          />
+        </p>
+        <p>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </p>
+        <p>
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </p>
 
-        <label htmlFor="phone">Phone Number:</label>
-        <input
-          type="tel"
-          name="phone"
-          onChange={(e) => setPhone(e.target.value)}
-        />
-
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          name="email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          name="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
         <label htmlFor="bio">Bio</label>
         <textarea
           type="text"
           name="bio"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <input type="submit" value="Save" />
+        <input className="btn btn-primary" type="submit" value="Save" />
       </form>
     </div>
   );

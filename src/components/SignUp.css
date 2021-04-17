@@ -1,0 +1,15 @@
+label{
+/* border: 1px solid green; */
+width: 10rem;
+}
+.wrapper{
+    width: max-content ;
+    /* margin: auto; */
+    display:flex ;
+    justify-content: center;
+    flex-direction: column;
+    /* border: hotpink 1px solid; */
+}
+.name{
+    width: 100%;
+}
