@@ -23,7 +23,6 @@ export default function AddPet(props) {
     // };
     const newAnimal = await createAnimal(nameAnimal);
     setLoading(false);
-    console.log(loading);
     onNewAnimal(newAnimal);
     setNameAnimal("");
     setSpecies("");
