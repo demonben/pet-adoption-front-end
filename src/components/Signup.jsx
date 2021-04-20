@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import "./SignUp.css";
+import { createNewProfile } from "../lib/api";
 
 Modal.setAppElement("#root");
 
@@ -12,29 +13,32 @@ export default function Signup(props) {
   const [password, setPassword] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  // console.log(props.func("zzzzzzz"))
-
-  const signup = (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem("firstName", firstName);
-    localStorage.setItem("secondName", secondName);
-    props.func(firstName, secondName);
+    const newProfile = {
+      firstName,
+      secondName,
+      phone,
+      email,
+      password,
+    };
+    createNewProfile(newProfile);
   };
-const handleCloseModal = ()=>{
-  setModalIsOpen(false)
-}
-  // props.func.
+
   return (
     <div>
       <button className="btn btn-primary" onClick={() => setModalIsOpen(true)}>
         Signup
       </button>
-      <Modal isOpen={modalIsOpen} onRequestClose={() => handleCloseModal()}>
+      <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
         <div className="d-flex justify-content-center">
           <p>Signup</p>
         </div>
 
-        <form className="d-flex justify-content-center" onSubmit={signup}>
+        <form
+          className="d-flex justify-content-center"
+          onSubmit={handleFormSubmit}
+        >
           <div className="wrapper">
             <div className="d-flex flex-row">
               <p className="name">Create a new Account</p>

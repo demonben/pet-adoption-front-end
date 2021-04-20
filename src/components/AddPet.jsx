@@ -1,11 +1,22 @@
 import React from "react";
 import { useState } from "react";
 import { createAnimal } from "../lib/api";
+// const { v4: uuid } = require("uuid");
 
 export default function AddPet(props) {
   const { onNewAnimal } = props;
+
   const [nameAnimal, setNameAnimal] = useState("");
-  const [species, setSpecies] = useState("");
+  const [type, setType] = useState("");
+  const [adoptionStatus, setAdoptionStatus] = useState("");
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
+  const [color, setColor] = useState("");
+  // const [bio, setBio] = useState("");
+  // const [hypoallergenic, setHypoallergenic] = useState("");
+  // const [dietaryRestriction, setDietaryRestriction] = useState("");
+  // const [breedOfAnimal, setBreedOfAnimal] = useState("");
+  
 
   const [loading, setLoading] = useState(false);
 
@@ -15,17 +26,15 @@ export default function AddPet(props) {
       return;
     }
     setLoading(true);
-    // const newAnimal = {
-    //   id: 1234,
-    //   nameAnimal,
-    //   species,
-    //   dateCreated: Date.now(),
-    // };
-    const newAnimal = await createAnimal(nameAnimal);
+    const newAnimal = {
+      nameAnimal,
+      type,
+    };
+    const addNewAnimal = await createAnimal(newAnimal);
     setLoading(false);
     onNewAnimal(newAnimal);
     setNameAnimal("");
-    setSpecies("");
+    setType("");
   };
 
   return (
@@ -33,10 +42,10 @@ export default function AddPet(props) {
       <h1>add new pet</h1>
       <form onSubmit={handleFormSubmit}>
         <p>
-          <label htmlFor="text">Name of animal</label>
+          <label htmlFor="animalName">Name of animal</label>
           <input
             type="text"
-            name="text"
+            name="animalName"
             value={nameAnimal}
             onChange={(e) => {
               setNameAnimal(e.target.value);
@@ -44,14 +53,63 @@ export default function AddPet(props) {
           />
         </p>
 
-        <label htmlFor="species">Species of animal</label>
+        <label htmlFor="type">Species of animal</label>
         <input
           type="text"
-          name="species"
-          value={species}
-          onChange={(e) => setSpecies(e.target.value)}
+          name="type"
+          value={type}
+          onChange={(e) => setType(e.target.value)}
           required
         />
+
+        <p>
+          <label htmlFor="adoptionStatus">Adoption status</label>
+          <input
+            type="text"
+            name="adoptionStatus"
+            value={adoptionStatus}
+            onChange={(e) => {
+              setAdoptionStatus(e.target.value);
+            }}
+          />
+        </p>
+
+        <p>
+          <label htmlFor="height">height</label>
+          <input
+            type="text"
+            name="height"
+            value={height}
+            onChange={(e) => {
+              setHeight(e.target.value);
+            }}
+          />
+        </p>
+
+        <p>
+          <label htmlFor="weight">Weight</label>
+          <input
+            type="text"
+            name="weight"
+            value={weight}
+            onChange={(e) => {
+              setWeight(e.target.value);
+            }}
+          />
+        </p>
+
+        <p>
+          <label htmlFor="color">Color</label>
+          <input
+            type="text"
+            name="color"
+            value={color}
+            onChange={(e) => {
+              setColor(e.target.value);
+            }}
+          />
+        </p>
+
         {loading && <span>Loading...</span>}
         {!loading && (
           <input className="btn btn-primary" type="submit" value="add" />

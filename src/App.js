@@ -14,32 +14,17 @@ import Dashboard from './components/Dashboard';
 import AddPet from './components/AddPet'
 import { getAnimals } from './lib/api';
 
-// const mockAnimal = [
-//   {
-//     id: 1234, nameAnimal:"Bobik",
-//     species:"dog", dateCreated: Date.now()},
-// {
-//   id: 12234234, nameAnimal:"Marusya",
-//     species:"cat", dateCreated: Date.now()
-// },
-// {
-//   id: 1254334534, nameAnimal: "CatAndDog",
-//     species:"catAndDog", dateCreated: Date.now()
-// }
-// ]
 
 function App() {
-  // const [nameUser, setName] = useState('')
-
   const [animals, setAddNewAnimal] = useState([]);
 
   useEffect(() => {
-   getAnimals().then(animals =>{
-     setAddNewAnimal(animals)
-   })
+    getAnimals().then(animals => {
+      setAddNewAnimal(animals)
+    })
   }, [])
 
-  const handleOnNewAnimal = (newAnimal) =>{
+  const handleOnNewAnimal = (newAnimal) => {
     setAddNewAnimal(prevAnimals => [...prevAnimals, newAnimal])
   }
 
@@ -73,7 +58,7 @@ function App() {
           </Router>
 
           <Router path="/addPet">
-            <AddPet onNewAnimal={handleOnNewAnimal}/>
+            <AddPet onNewAnimal={handleOnNewAnimal} />
           </Router>
 
           <Router path="/dashboard">
