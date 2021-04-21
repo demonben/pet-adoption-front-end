@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { createAnimal } from "../lib/api";
-// const { v4: uuid } = require("uuid");
 
 export default function AddPet(props) {
   const { onNewAnimal } = props;
@@ -12,23 +11,30 @@ export default function AddPet(props) {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
   const [color, setColor] = useState("");
-  // const [bio, setBio] = useState("");
-  // const [hypoallergenic, setHypoallergenic] = useState("");
-  // const [dietaryRestriction, setDietaryRestriction] = useState("");
-  // const [breedOfAnimal, setBreedOfAnimal] = useState("");
-  
+  const [bio, setBio] = useState("");
+  const [hypoallergenic, setHypoallergenic] = useState("");
+  const [dietaryRestriction, setDietaryRestriction] = useState("");
+  const [breedOfAnimal, setBreedOfAnimal] = useState("");
 
   const [loading, setLoading] = useState(false);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    if (loading||!nameAnimal) {
+    if (loading || !nameAnimal) {
       return;
     }
     setLoading(true);
     const newAnimal = {
       nameAnimal,
       type,
+      adoptionStatus,
+      height,
+      weight,
+      color,
+      bio,
+      hypoallergenic,
+      dietaryRestriction,
+      breedOfAnimal,
     };
     const addNewAnimal = await createAnimal(newAnimal);
     setLoading(false);
@@ -106,6 +112,54 @@ export default function AddPet(props) {
             value={color}
             onChange={(e) => {
               setColor(e.target.value);
+            }}
+          />
+        </p>
+
+        <p>
+          <label htmlFor="bio">Bio</label>
+          <input
+            type="text"
+            name="bio"
+            value={bio}
+            onChange={(e) => {
+              setBio(e.target.value);
+            }}
+          />
+        </p>
+
+        <p>
+          <label htmlFor="hypoallergenic">Hypoallergenic</label>
+          <input
+            type="text"
+            name="hypoallergenic"
+            value={hypoallergenic}
+            onChange={(e) => {
+              setHypoallergenic(e.target.value);
+            }}
+          />
+        </p>
+
+        <p>
+          <label htmlFor="dietaryRestriction">Dietary Restriction</label>
+          <input
+            type="text"
+            name="dietaryRestriction"
+            value={dietaryRestriction}
+            onChange={(e) => {
+              setDietaryRestriction(e.target.value);
+            }}
+          />
+        </p>
+
+        <p>
+          <label htmlFor="breedOfAnimal">BreedOfAnimal</label>
+          <input
+            type="text"
+            name="breedOfAnimal"
+            value={breedOfAnimal}
+            onChange={(e) => {
+              setBreedOfAnimal(e.target.value);
             }}
           />
         </p>
