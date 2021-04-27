@@ -1,18 +1,30 @@
 import React, { Component } from "react";
 import Modal from "react-modal";
 import { useState } from "react";
+import { logIn } from "../lib/api";
+import { useAuth } from "../context/auth";
 
 Modal.setAppElement("#root");
 
 export default function Login() {
+  const auth = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const login = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log("gj");
+    if ((email, password)) {
+      try {
+        console.log("login successfully");
+        const { token } = await logIn(email, password);
+        await auth.saveToken(token);
+      } catch (err) {
+        console.log("err");
+        alert("bad username and password");
+      }
+    }
   };
   const handleCloseModal = () => {
     setModalIsOpen(false);
@@ -25,10 +37,11 @@ export default function Login() {
       <Modal isOpen={modalIsOpen} onRequestClose={() => handleCloseModal()}>
         <p>Login</p>
 
-        <form onSubmit={login}>
+        <form onSubmit={handleFormSubmit}>
           <p>
             <label htmlFor="email">Email:</label>
             <input
+              value={email}
               type="email"
               name="email"
               onChange={(e) => setEmail(e.target.value)}
@@ -37,7 +50,8 @@ export default function Login() {
 
           <label htmlFor="password">Password:</label>
           <input
-            type="number"
+            value={password}
+            type="text"
             name="password"
             onChange={(e) => setPassword(e.target.value)}
           />

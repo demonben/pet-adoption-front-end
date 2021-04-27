@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
+import { useAuth } from "../context/auth";
 import { createAnimal } from "../lib/api";
 
 export default function AddPet(props) {
   const { onNewAnimal } = props;
-
+  const auth = useAuth();
   const [nameAnimal, setNameAnimal] = useState("");
   const [type, setType] = useState("");
   const [adoptionStatus, setAdoptionStatus] = useState("");
@@ -36,7 +37,12 @@ export default function AddPet(props) {
       dietaryRestriction,
       breedOfAnimal,
     };
-    const addNewAnimal = await createAnimal(newAnimal);
+    try {
+      const addNewAnimal = await createAnimal(newAnimal, auth.token);
+    } catch (err) {
+      alert("Error adding a new pet ");
+    }
+
     setLoading(false);
     onNewAnimal(newAnimal);
     setNameAnimal("");

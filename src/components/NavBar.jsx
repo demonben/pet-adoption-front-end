@@ -32,6 +32,7 @@ export default function NavBar() {
 
           <Nav.Link className="nav-item" href="/pets">
             Pets
+            
           </Nav.Link>
 
           <Nav.Link className="nav-item" href="/addPet">
