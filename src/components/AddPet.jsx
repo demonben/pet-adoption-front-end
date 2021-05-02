@@ -170,6 +170,19 @@ export default function AddPet(props) {
           />
         </p>
 
+        <p>
+          <label htmlFor="file">Picture</label>
+          <input
+            type="file"
+            name="file"
+            // value={breedOfAnimal}
+            onChange={(e) => {
+              // setBreedOfAnimal(e.target.value);
+              console.log(e.target.value);
+            }}
+          />
+        </p>
+
         {loading && <span>Loading...</span>}
         {!loading && (
           <input className="btn btn-primary" type="submit" value="add" />

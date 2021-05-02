@@ -27,7 +27,10 @@ export default function Signup(props) {
 
   return (
     <div>
-      <button className="btn btn-primary" onClick={() => setModalIsOpen(true)}>
+      <button
+        className="btn btn-primary auth"
+        onClick={() => setModalIsOpen(true)}
+      >
         Signup
       </button>
       <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>

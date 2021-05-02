@@ -11,35 +11,24 @@
 }
 .animalList{
   display: grid;
-  grid-auto-flow: column;
+  /* grid-auto-flow: column; */
   column-gap: 16px;
+  grid-template-columns: repeat(4,1fr);
+  row-gap: 16px;
 }
 .listAnimals{
-  max-width: 600px;
+  /* max-width: 600px; */
   margin: 0 auto;
   display: grid;
   row-gap: 30px;
   margin-top: 50px;
-  /* border: solid 1px green; */
 }
-/* nav start*/
-/* .navbar { */
-  /* border: 1px black solid; */
-  /* background-color: #e3f2fd; */
-  /* border-radius: 6px; */
-/* } */
 
-/* .nav-item { */
-  /* text-decoration: none; */
-  /* text-align: center; */
-  /* padding-left: 10px; */
-/* } */
-/* .navList { */
-  /* list-style-type: none; */
-  /* display: flex; */
-  /* flex-wrap: wrap; */
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* flex-direction: row; */
-/* } */
-/* nav end */
+.flexAuthorization{
+  display: flex;
+  flex-direction: row;
+}
+.auth{
+  margin-right: 10px;
+}
+

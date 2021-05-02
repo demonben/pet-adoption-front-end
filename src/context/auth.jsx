@@ -18,14 +18,11 @@ const AuthProvider = (props) => {
 
   const saveToken = async (token) => {
     setToken(token);
-    console.log(token);
-    await localStorage.setItem(tokenKey, token);
-    // await localforage.setItem(tokenKey, token);
+    await localforage.setItem(tokenKey, token);
   };
   const removeToken = async (token) => {
     setToken();
-    await localStorage.removeItem(tokenKey);
-    // await localforage.removeItem(tokenKey);
+    await localforage.removeItem(tokenKey);
   };
   useEffect(() => {
     localforage.getItem(tokenKey).then(token=>{
@@ -36,7 +33,6 @@ const AuthProvider = (props) => {
   }, []);
   return (
     <AuthContext.Provider value={{ token, saveToken, removeToken }}>
-      {/* {console.log(props.children)} */}
       {props.children}
     </AuthContext.Provider>
   );

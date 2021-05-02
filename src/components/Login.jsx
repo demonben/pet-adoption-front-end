@@ -19,7 +19,9 @@ export default function Login() {
       try {
         console.log("login successfully");
         const { token } = await logIn(email, password);
+        console.log(token);
         await auth.saveToken(token);
+        
       } catch (err) {
         console.log("err");
         alert("bad username and password");
@@ -31,7 +33,10 @@ export default function Login() {
   };
   return (
     <div>
-      <button className="btn btn-primary" onClick={() => setModalIsOpen(true)}>
+      <button
+        className="btn btn-primary auth"
+        onClick={() => setModalIsOpen(true)}
+      >
         Login
       </button>
       <Modal isOpen={modalIsOpen} onRequestClose={() => handleCloseModal()}>
