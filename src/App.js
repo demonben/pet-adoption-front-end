@@ -1,12 +1,11 @@
 import './App.css';
 import NavBar from './components/NavBar'
-import { BrowserRouter as Router, Redirect, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomePage from "./components/HomePage"
 import Signup from "./components/Signup"
-import Login from './components/Login';
-import SearchPage from './components/SearchPage';
+import SearchPage from './components/search/SearchPage';
 import React, { useState, useEffect } from 'react'
-import MyPetsPage from './components/MyPetsPage';
+import MyPetsPage from './components/myPetPage/MyPetsPage';
 import ProfileSettings from './components/ProfileSettings';
 import PetPage from "./components/PetPage"
 import Dashboard from './components/dashboard/Dashboard';
@@ -14,12 +13,15 @@ import AddPet from './components/AddPet'
 import { getAnimals, getUsers } from './lib/api';
 import AuthProvider, { useAuth } from './context/auth';
 import PetCard from './components/PetCard'
+import jwt_decode from "jwt-decode";
+
+
 
 const AppRouter = () => {
   const { token } = useAuth();
-
   const [animals, setAddNewAnimal] = useState([]);
   const [users, setUsers] = useState([])
+  const [userId,setUserId]=useState('')
 
   useEffect(() => {
     getAnimals().then(animals => {
@@ -29,6 +31,18 @@ const AppRouter = () => {
       setUsers(users)
     })
   }, [])
+
+  useEffect(() => {
+    if (token) {
+      const decoded = jwt_decode(token);
+      setUserId(decoded.id)
+    }
+  }, [token]);
+
+  const isAdmin = userId === '47fa040a-f2ab-488b-9083-d6c46f7b42b0'
+  const isLogin = userId
+
+  console.log("is admin",isAdmin)
   const onDeleteAnimal = (animalIndex) => {
     setAddNewAnimal(prevAnimals => {
       const left = prevAnimals.slice(0, animalIndex);
@@ -49,8 +63,9 @@ const AppRouter = () => {
 
   return (
     <Router>
-      <NavBar />
+      <NavBar isAdmin={isAdmin} isLogin={isLogin}/>
       <Switch>
+        
         <Route exact path="/">
           <HomePage users={users} />
         </Route>
@@ -67,12 +82,13 @@ const AppRouter = () => {
           <SearchPage />
         </Route>
 
+        {isLogin &&
         <Route path="/profile">
           <ProfileSettings />
         </Route>
+        }
 
         <Route path="/pets">
-          {/* {!token && <Redirect to="login" />} */}
           <PetPage animals={animals} />
         </Route>
 
@@ -80,9 +96,10 @@ const AppRouter = () => {
           <AddPet onNewAnimal={handleOnNewAnimal} />
         </Route>
 
-        <Route path="/dashboard">
-          <Dashboard animals={animals} users={users} onDeleteAnimal={onDeleteAnimal} onDeleteUser={onDeleteUser}/>
-        </Route>
+        {isAdmin && <Route path="/dashboard">
+          <Dashboard animals={animals} users={users} onDeleteAnimal={onDeleteAnimal} onDeleteUser={onDeleteUser} />
+        </Route>}
+        
 
         <Route path="/pet/:animalId">
           <PetCard />
@@ -103,23 +120,4 @@ function App() {
 }
 
 export default App;
-// function PrivateRoute({ children, ...rest }) {
-//   let auth = useAuth();
-//   return (
-//     <Route
-//       {...rest}
-//       render={({ location }) =>
-//         auth.token ? (
-//           children
-//         ) : (
-//           <Redirect
-//             to={{
-//               pathname: "/login",
-//               state: { from: location }
-//             }}
-//           />
-//         )
-//       }
-//     />
-//   );
-// }
+

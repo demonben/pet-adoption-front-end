@@ -1,7 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { useAuth } from "../context/auth";
-import { createAnimal } from "../lib/api";
+import { createAnimal, uploadPicture } from "../lib/api";
+import { Form } from "react-bootstrap";
+import { v4 as uuid4 } from "uuid";
 
 export default function AddPet(props) {
   const { onNewAnimal } = props;
@@ -16,16 +18,23 @@ export default function AddPet(props) {
   const [hypoallergenic, setHypoallergenic] = useState("");
   const [dietaryRestriction, setDietaryRestriction] = useState("");
   const [breedOfAnimal, setBreedOfAnimal] = useState("");
+  const [image, setImage] = useState(null);
 
   const [loading, setLoading] = useState(false);
 
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    if (loading || !nameAnimal) {
-      return;
-    }
-    setLoading(true);
+setLoading(true);
+    const formData = new FormData();
+    formData.append("image", image);
+    const id = uuid4();
+
+    const picture = await uploadPicture(id, auth.token, formData);
+    console.log("picture", picture.pictureUrl);
+    
     const newAnimal = {
+      id,
       nameAnimal,
       type,
       adoptionStatus,
@@ -36,15 +45,16 @@ export default function AddPet(props) {
       hypoallergenic,
       dietaryRestriction,
       breedOfAnimal,
+      urlAnimal: picture.pictureUrl,
     };
-    try {
-      const addNewAnimal = await createAnimal(newAnimal, auth.token);
-    } catch (err) {
-      alert("Error adding a new pet ");
-    }
-
-    setLoading(false);
+    
+    console.log(newAnimal);
+console.log(loading);
     onNewAnimal(newAnimal);
+    createAnimal(newAnimal, auth.token);
+    
+    setLoading(false);
+    alert("Pet was added");
     setNameAnimal("");
     setType("");
   };
@@ -89,7 +99,7 @@ export default function AddPet(props) {
         <p>
           <label htmlFor="height">height</label>
           <input
-            type="text"
+            type="number"
             name="height"
             value={height}
             onChange={(e) => {
@@ -101,7 +111,7 @@ export default function AddPet(props) {
         <p>
           <label htmlFor="weight">Weight</label>
           <input
-            type="text"
+            type="number"
             name="weight"
             value={weight}
             onChange={(e) => {
@@ -170,19 +180,12 @@ export default function AddPet(props) {
           />
         </p>
 
-        <p>
-          <label htmlFor="file">Picture</label>
-          <input
-            type="file"
-            name="file"
-            // value={breedOfAnimal}
-            onChange={(e) => {
-              // setBreedOfAnimal(e.target.value);
-              console.log(e.target.value);
-            }}
+        <Form.Group>
+          <Form.File
+            label={"Add pet image"}
+            onInput={(event) => setImage(event.target.files[0])}
           />
-        </p>
-
+        </Form.Group>
         {loading && <span>Loading...</span>}
         {!loading && (
           <input className="btn btn-primary" type="submit" value="add" />

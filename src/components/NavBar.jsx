@@ -3,7 +3,7 @@ import { BrowserRouter as Switch, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 
-export default function NavBar() {
+export default function NavBar({ isAdmin, isLogin }) {
   const [name, setName] = useState(localStorage.getItem("firstName"));
   useEffect(() => {
     // localStorage.getItem("firstName");
@@ -17,31 +17,32 @@ export default function NavBar() {
           <Nav.Link className="nav-item" href="/">
             Home
           </Nav.Link>
-
           <Nav.Link className="nav-item" href="/search">
             Search
           </Nav.Link>
-
+          {isLogin &&
           <Nav.Link className="nav-item" href="/myPets">
             My Pet Page
           </Nav.Link>
-
+          }
+          {isLogin &&
           <Nav.Link className="nav-item" href="/profile">
             Profile Settings
           </Nav.Link>
-
+          }
           <Nav.Link className="nav-item" href="/pets">
             Pets
-            
           </Nav.Link>
-
+          {isLogin &&
           <Nav.Link className="nav-item" href="/addPet">
             Add New pet
           </Nav.Link>
-
-          <Nav.Link className="nav-item" href="/dashboard">
-            Dashboard
-          </Nav.Link>
+          }
+          {isAdmin && (
+            <Nav.Link className="nav-item" href="/dashboard">
+              Dashboard
+            </Nav.Link>
+          )}
         </Nav>
         <Form inline></Form>
       </Navbar>

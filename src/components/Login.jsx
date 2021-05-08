@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Modal from "react-modal";
 import { useState } from "react";
 import { logIn } from "../lib/api";
@@ -17,13 +17,14 @@ export default function Login() {
     e.preventDefault();
     if ((email, password)) {
       try {
+        console.log(email);
+        console.log(password);
+        const { token} = await logIn(email, password);
         console.log("login successfully");
-        const { token } = await logIn(email, password);
-        console.log(token);
+
         await auth.saveToken(token);
-        
       } catch (err) {
-        console.log("err");
+        console.log(err);
         alert("bad username and password");
       }
     }

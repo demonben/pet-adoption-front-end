@@ -9,9 +9,14 @@ export const AnimalItemDash = ({ animal, onDeleteAnimal }) => {
     await deleteAnimal(animal.id, auth.token);
     onDeleteAnimal(animal.id);
   };
+  {
+    console.log(animal);
+  }
   return (
     <div className="animalItem">
+      
       <div>{animal.name_animal}</div>
+      <div>{animal.type}</div>
       <div>{animal.type}</div>
       <div>
         <button onClick={handleOnDeleteClick}>Delete</button>
