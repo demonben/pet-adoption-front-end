@@ -62,6 +62,7 @@ const AppRouter = () => {
   }
 
   return (
+    <div className="homePage">
     <Router>
       <NavBar isAdmin={isAdmin} isLogin={isLogin}/>
       <Switch>
@@ -106,6 +107,7 @@ const AppRouter = () => {
         </Route>
       </Switch>
     </Router>
+    </div>
   )
 }
 

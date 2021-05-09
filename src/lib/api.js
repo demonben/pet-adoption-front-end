@@ -43,6 +43,14 @@ export async function searchAnimalByType(type, token) {
         getAuthConfig(token))
     return response.data.animals
 }
+// didn't finish advance search
+export async function searchAnimalAdvance(name, token){
+    const response = await axios.get(
+        `${BaseUrl}/animals/name/${name}`,
+        getAuthConfig(token))
+    return response.data.animals
+}
+
 export async function uploadPicture(id, token, formData) {
     const response = await axios.put(`${BaseUrl}/animals/${id}/picture_url`, formData, getAuthConfig(token))
     return response.data

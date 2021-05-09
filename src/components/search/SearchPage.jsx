@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { searchAnimalByType } from "../../lib/api";
+import { searchAnimalByType, searchAnimalAdvance } from "../../lib/api";
 import { useAuth } from "../../context/auth";
 import { SearchAnimalsList } from "./SearchAnimalsList";
 
@@ -9,6 +9,7 @@ export default function SearchPage() {
   const [toggle, setToggle] = useState(true);
   const [simpleSearch, setSimpleSearch] = useState([]);
   const [type, setType] = useState("");
+  const [name, setName] = useState("");
 
   const advanceSearchToggle = () => {
     if (toggle) {
@@ -17,15 +18,16 @@ export default function SearchPage() {
       setToggle(true);
     }
   };
-  const searchHandler = async() => {
-   const searchData = await searchAnimalByType(type, auth.token);
-   console.log(searchData);
-   setSimpleSearch(searchData);
+  const searchHandler = async () => {
+    const searchData = await searchAnimalByType(type, auth.token);
+    console.log(searchData);
+    setSimpleSearch(searchData);
   };
 
-  const advanceSearchHandler = ()=>{
-
-  }
+  const advanceSearchHandler = () => {
+    searchAnimalAdvance(name);
+    console.log(name);
+  };
 
   return (
     <div>
@@ -43,7 +45,7 @@ export default function SearchPage() {
         <button
           type="button"
           id="form1"
-          className=" button btn btn-primary searchButton"
+          className=" button btn btn-primary "
           onClick={() => searchHandler()}
         >
           Search
@@ -65,8 +67,8 @@ export default function SearchPage() {
               type="search"
               className="form-control"
               placeholder="name of animal"
-              value={type}
-              onChange={(e) => setType(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
 
@@ -99,17 +101,17 @@ export default function SearchPage() {
               onChange={(e) => setType(e.target.value)}
             />
           </div>
+          <div>
+            <button
+              type="button"
+              className=" btn btn-primary searchButton"
+              onClick={() => advanceSearchHandler()}
+            >
+              search
+            </button>
+          </div>
         </div>
       )}
-      <div>
-        <button
-          type="button"
-          className=" btn btn-primary searchButton"
-          onClick={() => advanceSearchHandler()}
-        >
-          search
-        </button>
-      </div>
       {/* Can search based on Adoption Status, Height, Weight, Type, Name */}
       <div>
         <SearchAnimalsList simpleSearch={simpleSearch} />

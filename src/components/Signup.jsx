@@ -23,6 +23,7 @@ export default function Signup(props) {
       password,
     };
     createNewProfile(newProfile);
+    alert("user was created")
   };
 
   return (

@@ -20,8 +20,6 @@ export default function HomePage() {
       const decoded = jwt_decode(storage);
       setName(decoded.name);
       setLastName(decoded.lastName);
-      // console.log("storage",storage);
-      // console.log(lastName);
     }
   }, [storage, name, lastName]);
 
@@ -29,7 +27,7 @@ export default function HomePage() {
     await auth.removeToken();
   };
   return (
-    <div>
+    <div className="homePage">
       <div className="flexAuthorization">
         {auth.token && (
           <button
@@ -50,11 +48,11 @@ export default function HomePage() {
       <div className="textHomePage">
         {name && (
           <h1>
-            Welcome {name} {lastName} to our amazing site
+            Welcome {name} {lastName} to our amazing site!
           </h1>
         )}
-        {!name && <h1>Welcome to our amazing site </h1>}
-        <p>This service will help you to find new pet.</p>
+        {!name && <h1>Welcome to our amazing site! </h1>}
+        <h2>This service will help you to find new pet.</h2>
       </div>
     </div>
   );

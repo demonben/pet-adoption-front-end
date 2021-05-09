@@ -37,4 +37,7 @@
 .searchButton{
    margin-top: 18px;
 }
-
+.homePage{
+  background-color: rgb(165, 251, 191);
+  height: 100vh;  
+}

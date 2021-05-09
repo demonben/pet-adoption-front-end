@@ -20,15 +20,14 @@ export const CardInfoAnimal = ({ animal }) => {
   }, [token]);
 
   const isAvailable = !animal.owner_id;
-  const isFostered =
-    animal.adoption_status === "fostered" || "adopted";
+  const isFostered = animal.adoption_status === "fostered" || "adopted";
+  
   const isMyPet = animal.owner_id === idUserState;
   const status = isFostered ? "adopted" : "fostered";
 
   const handleCloseModal = () => {
     setModalIsOpen(false);
   };
-
 
   return (
     <div>
@@ -56,6 +55,7 @@ export const CardInfoAnimal = ({ animal }) => {
             <button
               onClick={() => {
                 takePet(animal.id, token, status, idUserState);
+                alert(status);
               }}
               className="btn btn-primary auth"
             >
@@ -67,6 +67,7 @@ export const CardInfoAnimal = ({ animal }) => {
             <button
               onClick={() => {
                 returnPet(animal.id);
+                alert("returned");
               }}
               className="btn btn-primary auth"
             >
